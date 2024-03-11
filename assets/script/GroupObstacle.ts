@@ -10,10 +10,15 @@ export class GroupObstacle extends Component {
     private haveCheckCollision:boolean = false;
     private haveCutHeight:boolean = false;
 
-    setHeight(height:number, baseY:number){
+    setHeight(height:number, baseY:number,poolObstacle){
         this.height = height;
         for(let i=0;i<height;i++){
-            let obs =instantiate(this.prefabObstacle);
+            let obs;
+            if(poolObstacle.length>0){
+                obs = instantiate(this.prefabObstacle);
+            }else{
+                obs = instantiate(this.prefabObstacle);
+            }
             obs.setParent(this.node);
             obs.setPosition(new Vec3(0,i*49,0));
         }
@@ -43,7 +48,7 @@ export class GroupObstacle extends Component {
     }
 
     update(deltaTime: number) {
-        this.node.translate(new Vec3(-50*deltaTime,0,0));
+        this.node.translate(new Vec3(-250*deltaTime,0,0));
     }
 }
 

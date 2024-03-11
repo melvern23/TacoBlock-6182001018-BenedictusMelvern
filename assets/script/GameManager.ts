@@ -26,17 +26,18 @@ export class GameManager extends Component {
     }
 
     getObstacle():Node{
-        if(this.poolObstacle.length>0){
-            return this.poolObstacle.shift();
-        }else{
-            return instantiate(this.groupObstacle);
-        }
+        // if(this.poolObstacle.length>0){
+        //     return this.poolObstacle.shift();
+        // }else{
+        //     return instantiate(this.groupObstacle);
+        // }
+        return instantiate(this.groupObstacle);
     }
 
     generateObstacle(){
         let obs1 = this.getObstacle();
         obs1.setParent(this.node);
-        obs1.getComponent(GroupObstacle).setHeight(randomRangeInt(2,4),this.baseY);
+        obs1.getComponent(GroupObstacle).setHeight(randomRangeInt(2,4),this.baseY,this.poolObstacle);
         this.listObstacleActive.push(obs1);
     }
 
@@ -61,6 +62,24 @@ export class GameManager extends Component {
                         this.player.gameOver();
                     }
                 }
+            }
+            if(obstacle.position.x<=-192){
+                this.listObstacleActive[i].active = false;
+            }
+        }
+        for(let j=this.listObstacleActive.length-1;j>=0;j--){
+            console.log("cek: j: "+j+" "+this.listObstacleActive[j].active)
+            if(this.listObstacleActive[j].active==false){
+                let toRemove = this.listObstacleActive[j];
+                this.listObstacleActive.splice(j,1);
+                for(let i=0;i<toRemove.children.length;i++){
+                    if(toRemove.children[i].name="Obstacle"){
+                        this.poolObstacle.push(toRemove.children[i]);
+                    }else{
+
+                    }
+                }
+                toRemove.removeAllChildren();
             }
         }
         
