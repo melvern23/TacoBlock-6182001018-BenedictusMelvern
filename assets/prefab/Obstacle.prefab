@@ -79,7 +79,7 @@
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 0
     },
     "_id": ""
   },
@@ -141,6 +141,7 @@
       "__id__": 0
     },
     "fileId": "26YgHMk4JBoKi2NQxvSRGO",
+    "instance": null,
     "targetOverrides": null
   }
 ]
