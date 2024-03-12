@@ -1,4 +1,4 @@
-import { _decorator, CCFloat, Component, Input, input, instantiate, Node, Prefab, Vec3 } from 'cc';
+import { _decorator, Button, CCFloat, Component,Animation, director, Input, input, instantiate, Label, Node, Prefab, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
@@ -7,17 +7,22 @@ export class Player extends Component {
     @property({type: CCFloat})gravity:number;
     @property({type: Node})ground:Node;
     @property({type: Prefab})prefabBlock:Prefab;
+    @property({type:Label})gameoverText:Label;
+    @property({type:Button})retryButton:Button;
 
     private vy:number = 0;
     private baseY:number = 0;
     private hBlock = 49;
     private height:number = 0;
+    public playerAnimation : Animation;
 
     private listBlock:Node[] = [];
 
     start() {
         this.baseY = this.ground.getPosition().y+40;
         input.on(Input.EventType.TOUCH_START,this.spawnBlock,this);
+        this.gameoverText.node.active = false;
+        this.retryButton.node.active = false;
     }
 
     spawnBlock(){
@@ -69,7 +74,9 @@ export class Player extends Component {
     }
 
     gameOver(){
-        alert('game over');
+        this.gameoverText.node.active = true;
+        this.retryButton.node.active = true;
+        this.baseY = 49;
     }
 }
 

@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Node, Prefab, randomRangeInt } from 'cc';
+import { _decorator, Component, instantiate, Node, Prefab, randomRangeInt, Animation } from 'cc';
 import { GroupObstacle } from './GroupObstacle';
 import { Player } from './Player';
 const { ccclass, property } = _decorator;
@@ -59,6 +59,8 @@ export class GameManager extends Component {
                     if(this.player.getHeight() >= obsHeight){
                         this.player.cutPlayer(obsHeight,obstacle);
                     }else{
+                        this.player.playerAnimation = this.player.getComponent(Animation);
+                        this.player.playerAnimation.play();
                         this.player.gameOver();
                     }
                 }
