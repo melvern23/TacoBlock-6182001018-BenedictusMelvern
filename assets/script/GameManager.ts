@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Node, Prefab, randomRangeInt, Animation } from 'cc';
+import { _decorator, Component, instantiate, Node, Prefab, randomRangeInt, Animation, director } from 'cc';
 import { GroupObstacle } from './GroupObstacle';
 import { Player } from './Player';
 const { ccclass, property } = _decorator;

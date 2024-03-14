@@ -57,7 +57,7 @@ export class Player extends Component {
         let count = 0;
         for(let i=this.listBlock.length-1;i>=0;i--){
             let block = this.listBlock[i];
-            let targetPosition = this.baseY+(this.height-1-count)*this.hBlock; 
+            let targetPosition = this.baseY+(this.height-1-count)*this.hBlock;
             if(block.position.y>targetPosition){
                 block.translate(new Vec3(0,this.vy*deltaTime,0));
                 if(block.position.y<targetPosition){
@@ -76,7 +76,13 @@ export class Player extends Component {
     gameOver(){
         this.gameoverText.node.active = true;
         this.retryButton.node.active = true;
-        this.baseY = 49;
+        this.retryButton.node.on(Node.EventType.MOUSE_UP,this.retryClicked,this);
+    }
+
+    retryClicked(){
+        director.loadScene('scene1');
+        this.gameoverText.node.active = false;
+        this.retryButton.node.active = false;
     }
 }
 
